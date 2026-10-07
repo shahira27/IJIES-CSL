@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-US">
+  <info>
+    <title>International Journal of Intelligent Engineering and Systems (IJIES)</title>
+    <title-short>IJIES</title-short>
+    <id>http://www.zotero.org/styles/ijies-custom</id>
+    <link href="http://www.zotero.org/styles/ijies-custom" rel="self"/>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <summary>Custom numeric style following the IJIES author guidelines (not an official style).</summary>
+    <updated>2026-10-07T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name and="text" initialize-with=". " delimiter=", " delimiter-precedes-last="contextual"/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="title-quoted">
+    <text variable="title" prefix="“" suffix="”"/>
+  </macro>
+
+  <macro name="vol-issue">
+    <group delimiter=", ">
+      <group>
+        <text value="Vol." suffix=" "/>
+        <text variable="volume"/>
+      </group>
+      <group>
+        <text value="No." suffix=" "/>
+        <text variable="issue"/>
+      </group>
+    </group>
+  </macro>
+
+  <macro name="pages">
+    <group>
+      <text value="pp." suffix=" "/>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="place">
+    <choose>
+      <if variable="publisher-place">
+        <text variable="publisher-place"/>
+      </if>
+      <else>
+        <text variable="event-place"/>
+      </else>
+    </choose>
+  </macro>
+
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography second-field-align="flush">
+    <layout suffix=".">
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <group delimiter=", ">
+        <choose>
+          <if type="article-journal article-magazine article-newspaper" match="any">
+            <text macro="author"/>
+            <text macro="title-quoted"/>
+            <text variable="container-title"/>
+            <text macro="vol-issue"/>
+            <text macro="pages"/>
+            <text macro="year"/>
+          </if>
+          <else-if type="paper-conference" match="any">
+            <text macro="author"/>
+            <text macro="title-quoted"/>
+            <choose>
+              <if variable="container-title">
+                <text variable="container-title" prefix="In: Proc. of "/>
+              </if>
+              <else>
+                <text variable="event" prefix="In: Proc. of "/>
+              </else>
+            </choose>
+            <text macro="place"/>
+            <text macro="pages"/>
+            <text macro="year"/>
+          </else-if>
+          <else-if type="book report thesis" match="any">
+            <text macro="author"/>
+            <text variable="title"/>
+            <group>
+              <text value="Vol." suffix=" "/>
+              <text variable="volume"/>
+            </group>
+            <text variable="publisher"/>
+            <text macro="place"/>
+            <text macro="year"/>
+          </else-if>
+          <else>
+            <text macro="author"/>
+            <text macro="title-quoted"/>
+            <text variable="container-title"/>
+            <text variable="publisher"/>
+            <text macro="year"/>
+          </else>
+        </choose>
+      </group>
+    </layout>
+  </bibliography>
+</style>
